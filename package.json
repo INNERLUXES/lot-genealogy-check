@@ -1,0 +1,51 @@
+{
+  "name": "lot-genealogy-check",
+  "version": "1.0.0",
+  "description": "Lot genealogy check: reads a spreadsheet of production and custody events (CSV or TSV, one row for each receive, produce, ship, assemble or scrap) and lists, with its line, what does not hold together before the records go on a shared ledger: input lots that were never received or made, outputs larger than their inputs, lots that give more than they hold, serial numbers made twice or on two lots, custody gaps and times that go back, and lots that are their own input. Traces a lot backward to the lots it is made from or forward to the lots made from it. Every check is a best practice of the tool; it checks the records in a file, not whether they are true, and it is not a certification of any kind. Contacts nothing over the network, writes nothing. Text, markdown, JSON and SARIF output, exit codes for a pipeline, no dependencies.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "lot-genealogy-check": "bin/lot-genealogy-check.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "docs",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.js\"",
+    "test:coverage": "node --test --experimental-test-coverage \"test/*.test.js\"",
+    "check": "node tools/check.mjs",
+    "example": "node tools/example.mjs"
+  },
+  "keywords": [
+    "traceability",
+    "lot-traceability",
+    "genealogy",
+    "provenance",
+    "supply-chain",
+    "manufacturing",
+    "blockchain",
+    "digital-product-passport",
+    "data-quality",
+    "csv",
+    "cli",
+    "nodejs"
+  ],
+  "author": "INNERLUXES <info@innerluxes.dev>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/INNERLUXES/lot-genealogy-check.git"
+  },
+  "homepage": "https://innerluxes.dev/blockchain/traceability-provenance"
+}
