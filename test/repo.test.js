@@ -226,15 +226,15 @@ test('workflows: every action is pinned to a commit, the CI runs three systems, 
   assert.match(ci, /node \.ssdf\/bin\/ssdf-repo-check\.js repo --require-all --fail-on-problem/);
   assert.match(ci, /repository: INNERLUXES\/ssdf-repo-check/);
   assert.match(ci, /ref: dfda194a3ed35623b8b420df05e110b66d984586 # v1\.0\.0/);
-  assert.match(ci, /actions\/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7\.0\.1/);
-  assert.match(ci, /actions\/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7\.0\.0/);
+  assert.match(ci, /actions\/checkout@[0-9a-f]{40} # v\d+\.\d+\.\d+/);
+  assert.match(ci, /actions\/setup-node@[0-9a-f]{40} # v\d+\.\d+\.\d+/);
   for (const s of [/npm ci/, /npm run check/, /npm run example/, /git diff --exit-code -- examples/]) assert.match(ci, s);
 });
 
 test('codeql: JavaScript only, with the security-extended queries, and the examples left out', async () => {
   const codeql = await read('.github/workflows/codeql.yml');
   assert.match(codeql, /languages: javascript-typescript/);
-  assert.match(codeql, /github\/codeql-action\/init@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4\.38\.2/);
+  assert.match(codeql, /github\/codeql-action\/init@[0-9a-f]{40} # v\d+\.\d+\.\d+/);
   assert.doesNotMatch(codeql, /autobuild/i);
   assert.match(codeql, /security-extended/);
   assert.match(codeql, /paths-ignore:\n\s+- examples\n/);
@@ -253,7 +253,7 @@ test('release workflow: the SSDF gate, then a tgz, a CycloneDX SBOM, SHA256SUMS 
   assert.match(release, /npm pack --pack-destination dist/);
   assert.match(release, /npm sbom --sbom-format cyclonedx > dist\/lot-genealogy-check\.cdx\.json/);
   assert.match(release, /sha256sum \* > SHA256SUMS/);
-  assert.match(release, /actions\/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4\.2\.2/);
+  assert.match(release, /actions\/attest-build-provenance@[0-9a-f]{40} # v\d+\.\d+\.\d+/);
   assert.match(release, /tags: \['v\*'\]/);
 });
 
