@@ -1,0 +1,267 @@
+{
+  "tool": "lot-genealogy-check",
+  "version": "1.0.0",
+  "input": {
+    "file": "examples/good/events.csv",
+    "format": "CSV",
+    "bytes": 3367,
+    "lines": 26
+  },
+  "events": {
+    "rows": 25,
+    "skipped": 0,
+    "columns": 14,
+    "read": 14,
+    "unread": 0,
+    "lots": 5,
+    "parties": 6,
+    "serials": 4,
+    "types": [
+      {
+        "id": "receive",
+        "label": "receive",
+        "rows": 8,
+        "lots": 5
+      },
+      {
+        "id": "produce",
+        "label": "produce",
+        "rows": 4,
+        "lots": 4
+      },
+      {
+        "id": "ship",
+        "label": "ship",
+        "rows": 8,
+        "lots": 5
+      },
+      {
+        "id": "assemble",
+        "label": "assemble",
+        "rows": 4,
+        "lots": 1
+      },
+      {
+        "id": "scrap",
+        "label": "scrap",
+        "rows": 1,
+        "lots": 1
+      }
+    ],
+    "firstTime": "2101-01-10T08:00:00Z",
+    "lastTime": "2101-01-23T10:00:00Z"
+  },
+  "totals": {
+    "findings": 0,
+    "byLevel": {
+      "error": 0,
+      "warning": 0,
+      "info": 0
+    },
+    "hidden": 0
+  },
+  "rules": [
+    {
+      "id": "file-unreadable",
+      "level": "error",
+      "kind": "file",
+      "findings": 0
+    },
+    {
+      "id": "column-missing",
+      "level": "error",
+      "kind": "file",
+      "findings": 0
+    },
+    {
+      "id": "column-unknown",
+      "level": "warning",
+      "kind": "file",
+      "findings": 0
+    },
+    {
+      "id": "column-duplicate",
+      "level": "error",
+      "kind": "file",
+      "findings": 0
+    },
+    {
+      "id": "row-malformed",
+      "level": "error",
+      "kind": "file",
+      "findings": 0
+    },
+    {
+      "id": "secret-in-file",
+      "level": "error",
+      "kind": "file",
+      "findings": 0
+    },
+    {
+      "id": "event-type-unknown",
+      "level": "error",
+      "kind": "row",
+      "findings": 0
+    },
+    {
+      "id": "event-incomplete",
+      "level": "error",
+      "kind": "row",
+      "findings": 0
+    },
+    {
+      "id": "quantity-not-positive",
+      "level": "error",
+      "kind": "row",
+      "findings": 0
+    },
+    {
+      "id": "unit-missing",
+      "level": "error",
+      "kind": "row",
+      "findings": 0
+    },
+    {
+      "id": "input-lots-unreadable",
+      "level": "error",
+      "kind": "row",
+      "findings": 0
+    },
+    {
+      "id": "date-invalid",
+      "level": "error",
+      "kind": "row",
+      "findings": 0
+    },
+    {
+      "id": "future-date",
+      "level": "error",
+      "kind": "row",
+      "findings": 0
+    },
+    {
+      "id": "mass-balance-exceeded",
+      "level": "warning",
+      "kind": "row",
+      "findings": 0
+    },
+    {
+      "id": "units-not-comparable",
+      "level": "info",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "input-lot-not-available",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "lot-overdrawn",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "serial-born-twice",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "serial-on-two-lots",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "custody-gap",
+      "level": "warning",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "custody-time-reversed",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "receive-without-ship",
+      "level": "info",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "ship-without-receive",
+      "level": "info",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "genealogy-loop",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "duplicate-row",
+      "level": "warning",
+      "kind": "across rows",
+      "findings": 0
+    },
+    {
+      "id": "event-id-repeated",
+      "level": "warning",
+      "kind": "across rows",
+      "findings": 0
+    }
+  ],
+  "options": {
+    "minSeverity": "info",
+    "failOn": "error",
+    "now": "2101-03-10T12:00:00Z",
+    "yieldTolerance": "0"
+  },
+  "findings": [],
+  "eventTypes": [
+    {
+      "id": "receive",
+      "label": "receive",
+      "rows": 8,
+      "lots": 5
+    },
+    {
+      "id": "produce",
+      "label": "produce",
+      "rows": 4,
+      "lots": 4
+    },
+    {
+      "id": "ship",
+      "label": "ship",
+      "rows": 8,
+      "lots": 5
+    },
+    {
+      "id": "assemble",
+      "label": "assemble",
+      "rows": 4,
+      "lots": 1
+    },
+    {
+      "id": "scrap",
+      "label": "scrap",
+      "rows": 1,
+      "lots": 1
+    }
+  ],
+  "notes": [],
+  "notice": "This report checks the records in the file, not whether they are true, and it is not a certification of any kind.",
+  "result": {
+    "pass": true,
+    "failOn": "error",
+    "text": "PASS - no finding at or above error"
+  }
+}

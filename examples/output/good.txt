@@ -1,0 +1,56 @@
+lot-genealogy-check: examples/good/events.csv
+file: examples/good/events.csv (CSV, 26 lines, 3,367 bytes)
+rows: 25 (8 receive, 4 produce, 8 ship, 4 assemble and 1 scrap)
+columns: 14 in the header, 14 read, 0 not read
+lots: 5 lots, 6 parties, 4 serial numbers
+event times: from 2101-01-10T08:00:00Z to 2101-01-23T10:00:00Z
+now: 2101-03-10T12:00:00Z, from --now
+yield tolerance: 0 percent
+findings: 0
+
+Checks (26)
+
+  check                    level    kind         findings
+  file-unreadable          error    file         0
+  column-missing           error    file         0
+  column-unknown           warning  file         0
+  column-duplicate         error    file         0
+  row-malformed            error    file         0
+  secret-in-file           error    file         0
+  event-type-unknown       error    row          0
+  event-incomplete         error    row          0
+  quantity-not-positive    error    row          0
+  unit-missing             error    row          0
+  input-lots-unreadable    error    row          0
+  date-invalid             error    row          0
+  future-date              error    row          0
+  mass-balance-exceeded    warning  row          0
+  units-not-comparable     info     across rows  0
+  input-lot-not-available  error    across rows  0
+  lot-overdrawn            error    across rows  0
+  serial-born-twice        error    across rows  0
+  serial-on-two-lots       error    across rows  0
+  custody-gap              warning  across rows  0
+  custody-time-reversed    error    across rows  0
+  receive-without-ship     info     across rows  0
+  ship-without-receive     info     across rows  0
+  genealogy-loop           error    across rows  0
+  duplicate-row            warning  across rows  0
+  event-id-repeated        warning  across rows  0
+
+Findings (0)
+
+  none
+
+Event types (5)
+
+  event type  rows  lots
+  receive     8     5
+  produce     4     4
+  ship        8     5
+  assemble    4     1
+  scrap       1     1
+
+This report checks the records in the file, not whether they are true, and it is not a certification of any kind.
+
+RESULT: PASS - no finding at or above error

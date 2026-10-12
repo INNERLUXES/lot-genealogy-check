@@ -1,0 +1,26 @@
+event_id,event_type,event_time,party,site,from_party,to_party,lot,serial,product,quantity,unit,input_lots,document_ref
+E-001,produce,2101-01-10T08:00:00Z,Alder Plastics Ltd,Molding hall,,,HSG-A1,,Sensor housing,100,pieces,,WO-101
+E-002,produce,2101-01-10T09:00:00Z,Birch Circuits Co,Board line,,,PCB-B1,,Circuit board,60,pieces,,WO-102
+E-003,produce,2101-01-11T07:30:00Z,Cedar Cable Works,Cable line,,,CBL-C1,,Cable set,60,pieces,,WO-103
+E-004,ship,2101-01-12T10:00:00Z,Alder Plastics Ltd,Loading bay,,Eastside Assembly Plant,HSG-A1,,Sensor housing,100,pieces,,DN-201
+E-005,ship,2101-01-12T10:30:00Z,Birch Circuits Co,Loading bay,,Delta Module Works,PCB-B1,,Circuit board,60,pieces,,DN-202
+E-006,ship,2101-01-12T11:00:00Z,Cedar Cable Works,Loading bay,,Delta Module Works,CBL-C1,,Cable set,60,pieces,,DN-203
+E-007,receive,2101-01-13T08:00:00Z,Delta Module Works,Dock 1,Birch Circuits Co,,PCB-B1,,Circuit board,60,pieces,,DN-202
+E-008,receive,2101-01-13T08:10:00Z,Delta Module Works,Dock 1,Cedar Cable Works,,CBL-C1,,Cable set,60,pieces,,DN-203
+E-009,receive,2101-01-13T09:00:00Z,Eastside Assembly Plant,Dock 4,Alder Plastics Ltd,,HSG-A1,,Sensor housing,100,pieces,,DN-201
+E-010,produce,2101-01-15T10:00:00Z,Delta Module Works,Module line,,,MOD-D1,,Sensor module,60,pieces,PCB-B1:60:pieces;CBL-C1:60:pieces,WO-104
+E-011,ship,2101-01-16T09:00:00Z,Delta Module Works,Loading bay,,Eastside Assembly Plant,MOD-D1,,Sensor module,60,pieces,,DN-204
+E-012,receive,2101-01-17T08:00:00Z,Eastside Assembly Plant,Dock 4,Delta Module Works,,MOD-D1,,Sensor module,60,pieces,,DN-204
+E-013,assemble,2101-01-20T13:00:00Z,Eastside Assembly Plant,Final line,,,FIN-E1,SN-0001,Garden sensor,1,pieces,HSG-A1:1:pieces;MOD-D1:1:pieces,WO-105
+E-013,assemble,2101-01-20T13:00:00Z,Eastside Assembly Plant,Final line,,,FIN-E1,SN-0002,Garden sensor,1,pieces,HSG-A1:1:pieces;MOD-D1:1:pieces,WO-105
+E-013,assemble,2101-01-20T13:00:00Z,Eastside Assembly Plant,Final line,,,FIN-E1,SN-0003,Garden sensor,1,pieces,HSG-A1:1:pieces;MOD-D1:1:pieces,WO-105
+E-013,assemble,2101-01-20T13:00:00Z,Eastside Assembly Plant,Final line,,,FIN-E1,SN-0004,Garden sensor,1,pieces,HSG-A1:1:pieces;MOD-D1:1:pieces,WO-105
+E-014,scrap,2101-01-21,Eastside Assembly Plant,Final line,,,HSG-A1,,Sensor housing,2,pieces,,SC-001
+E-015,ship,2101-01-22T08:00:00Z,Eastside Assembly Plant,Loading bay,,Fairview Distribution,FIN-E1,SN-0001,Garden sensor,1,pieces,,DN-205
+E-016,ship,2101-01-22T08:00:00Z,Eastside Assembly Plant,Loading bay,,Fairview Distribution,FIN-E1,SN-0002,Garden sensor,1,pieces,,DN-205
+E-017,ship,2101-01-22T08:00:00Z,Eastside Assembly Plant,Loading bay,,Fairview Distribution,FIN-E1,SN-0003,Garden sensor,1,pieces,,DN-205
+E-018,ship,2101-01-22T08:00:00Z,Eastside Assembly Plant,Loading bay,,Fairview Distribution,FIN-E1,SN-0004,Garden sensor,1,pieces,,DN-205
+E-019,receive,2101-01-23T10:00:00Z,Fairview Distribution,Warehouse,Eastside Assembly Plant,,FIN-E1,SN-0001,Garden sensor,1,pieces,,DN-205
+E-020,receive,2101-01-23T10:00:00Z,Fairview Distribution,Warehouse,Eastside Assembly Plant,,FIN-E1,SN-0002,Garden sensor,1,pieces,,DN-205
+E-021,receive,2101-01-23T10:00:00Z,Fairview Distribution,Warehouse,Eastside Assembly Plant,,FIN-E1,SN-0003,Garden sensor,1,pieces,,DN-205
+E-022,receive,2101-01-23T10:00:00Z,Fairview Distribution,Warehouse,Eastside Assembly Plant,,FIN-E1,SN-0004,Garden sensor,1,pieces,,DN-205

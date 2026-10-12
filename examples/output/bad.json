@@ -1,0 +1,672 @@
+{
+  "tool": "lot-genealogy-check",
+  "version": "1.0.0",
+  "input": {
+    "file": "examples/bad/events.csv",
+    "format": "CSV",
+    "bytes": 3205,
+    "lines": 40
+  },
+  "events": {
+    "rows": 38,
+    "skipped": 1,
+    "columns": 15,
+    "read": 13,
+    "unread": 1,
+    "lots": 21,
+    "parties": 3,
+    "serials": 4,
+    "types": [
+      {
+        "id": "receive",
+        "label": "receive",
+        "rows": 5,
+        "lots": 5
+      },
+      {
+        "id": "produce",
+        "label": "produce",
+        "rows": 17,
+        "lots": 17
+      },
+      {
+        "id": "ship",
+        "label": "ship",
+        "rows": 7,
+        "lots": 6
+      },
+      {
+        "id": "assemble",
+        "label": "assemble",
+        "rows": 5,
+        "lots": 4
+      },
+      {
+        "id": "scrap",
+        "label": "scrap",
+        "rows": 2,
+        "lots": 1
+      },
+      {
+        "id": "other",
+        "label": "no known kind",
+        "rows": 1,
+        "lots": 0
+      }
+    ],
+    "firstTime": "2101-02-01T07:00:00Z",
+    "lastTime": "2101-04-20T08:00:00Z"
+  },
+  "totals": {
+    "findings": 28,
+    "byLevel": {
+      "error": 18,
+      "warning": 6,
+      "info": 4
+    },
+    "hidden": 0
+  },
+  "rules": [
+    {
+      "id": "file-unreadable",
+      "level": "error",
+      "kind": "file",
+      "findings": 0
+    },
+    {
+      "id": "column-missing",
+      "level": "error",
+      "kind": "file",
+      "findings": 1
+    },
+    {
+      "id": "column-unknown",
+      "level": "warning",
+      "kind": "file",
+      "findings": 1
+    },
+    {
+      "id": "column-duplicate",
+      "level": "error",
+      "kind": "file",
+      "findings": 1
+    },
+    {
+      "id": "row-malformed",
+      "level": "error",
+      "kind": "file",
+      "findings": 1
+    },
+    {
+      "id": "secret-in-file",
+      "level": "error",
+      "kind": "file",
+      "findings": 1
+    },
+    {
+      "id": "event-type-unknown",
+      "level": "error",
+      "kind": "row",
+      "findings": 1
+    },
+    {
+      "id": "event-incomplete",
+      "level": "error",
+      "kind": "row",
+      "findings": 1
+    },
+    {
+      "id": "quantity-not-positive",
+      "level": "error",
+      "kind": "row",
+      "findings": 1
+    },
+    {
+      "id": "unit-missing",
+      "level": "error",
+      "kind": "row",
+      "findings": 1
+    },
+    {
+      "id": "input-lots-unreadable",
+      "level": "error",
+      "kind": "row",
+      "findings": 1
+    },
+    {
+      "id": "date-invalid",
+      "level": "error",
+      "kind": "row",
+      "findings": 1
+    },
+    {
+      "id": "future-date",
+      "level": "error",
+      "kind": "row",
+      "findings": 1
+    },
+    {
+      "id": "mass-balance-exceeded",
+      "level": "warning",
+      "kind": "row",
+      "findings": 1
+    },
+    {
+      "id": "units-not-comparable",
+      "level": "info",
+      "kind": "across rows",
+      "findings": 1
+    },
+    {
+      "id": "input-lot-not-available",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 2
+    },
+    {
+      "id": "lot-overdrawn",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 1
+    },
+    {
+      "id": "serial-born-twice",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 1
+    },
+    {
+      "id": "serial-on-two-lots",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 1
+    },
+    {
+      "id": "custody-gap",
+      "level": "warning",
+      "kind": "across rows",
+      "findings": 2
+    },
+    {
+      "id": "custody-time-reversed",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 1
+    },
+    {
+      "id": "receive-without-ship",
+      "level": "info",
+      "kind": "across rows",
+      "findings": 1
+    },
+    {
+      "id": "ship-without-receive",
+      "level": "info",
+      "kind": "across rows",
+      "findings": 2
+    },
+    {
+      "id": "genealogy-loop",
+      "level": "error",
+      "kind": "across rows",
+      "findings": 1
+    },
+    {
+      "id": "duplicate-row",
+      "level": "warning",
+      "kind": "across rows",
+      "findings": 1
+    },
+    {
+      "id": "event-id-repeated",
+      "level": "warning",
+      "kind": "across rows",
+      "findings": 1
+    }
+  ],
+  "options": {
+    "minSeverity": "info",
+    "failOn": "error",
+    "now": "2101-03-10T12:00:00Z",
+    "yieldTolerance": "0"
+  },
+  "findings": [
+    {
+      "id": "column-missing",
+      "severity": "error",
+      "message": "The header has no \"product\" column, but the rows of produce, assemble and receive need it; 27 rows are affected and none of them is reported for it one by one.",
+      "file": "examples/bad/events.csv",
+      "line": 1,
+      "column": 1,
+      "at": "examples/bad/events.csv:1",
+      "subject": null,
+      "fix": "Add the column named to the spreadsheet and fill it for the rows that need it; docs/inputs.md lists every column.",
+      "kind": "file",
+      "own": "Asking for these columns is a best practice of this tool; no regulation sets it; the columns and their names are the tool's own, because no regulation fixes them",
+      "context": null
+    },
+    {
+      "id": "column-duplicate",
+      "severity": "error",
+      "message": "The column \"Event Time\" has the same name as column 3 once case and separators are ignored; only the first is read.",
+      "file": "examples/bad/events.csv",
+      "line": 1,
+      "column": 124,
+      "at": "examples/bad/events.csv:1",
+      "subject": null,
+      "fix": "Keep one column of each name.",
+      "kind": "file",
+      "own": "Refusing a column written twice is a best practice of this tool; no regulation sets it; two readers could see two values",
+      "context": null
+    },
+    {
+      "id": "input-lot-not-available",
+      "severity": "error",
+      "message": "Row 5 (assemble) uses the input lot GHOST-9, which no receive or produce row of the file holds.",
+      "file": "examples/bad/events.csv",
+      "line": 6,
+      "column": 70,
+      "at": "examples/bad/events.csv:6",
+      "subject": "GHOST-9",
+      "fix": "Add the receive or produce row of the lot, correct the lot code, or correct the times; a lot has to exist before it is used.",
+      "kind": "across rows",
+      "own": "Following each input back to a row is a best practice of this tool; no regulation sets it; a lot that appears out of nowhere cannot be traced back",
+      "context": "GS1 EPCIS has an event type for an event that uses input items or lots and makes output items or lots, and a produce or assemble row with input_lots is the same idea in a spreadsheet; this tool does not read EPCIS and does not check conformance to it."
+    },
+    {
+      "id": "input-lot-not-available",
+      "severity": "error",
+      "message": "Row 6 (assemble) uses the input lot LATE-1 at 2101-02-04T09:00:00Z, but the first row that receives or makes it, row 7, is dated 2101-02-10T08:00:00Z.",
+      "file": "examples/bad/events.csv",
+      "line": 7,
+      "column": 70,
+      "at": "examples/bad/events.csv:7",
+      "subject": "LATE-1",
+      "fix": "Add the receive or produce row of the lot, correct the lot code, or correct the times; a lot has to exist before it is used.",
+      "kind": "across rows",
+      "own": "Following each input back to a row is a best practice of this tool; no regulation sets it; a lot that appears out of nowhere cannot be traced back",
+      "context": "GS1 EPCIS has an event type for an event that uses input items or lots and makes output items or lots, and a produce or assemble row with input_lots is the same idea in a spreadsheet; this tool does not read EPCIS and does not check conformance to it."
+    },
+    {
+      "id": "lot-overdrawn",
+      "severity": "error",
+      "message": "By row 9 (ship) 150 kg of the lot OVR-1 have been shipped, scrapped or used by Acme Mill, but Acme Mill received or made only 100 kg of it.",
+      "file": "examples/bad/events.csv",
+      "line": 10,
+      "column": 64,
+      "at": "examples/bad/events.csv:10",
+      "subject": "OVR-1",
+      "fix": "Check the quantities of the row named, and whether a receive or produce row of the lot is missing from the file.",
+      "kind": "across rows",
+      "own": "Adding up what a party holds of a lot and what leaves it is a best practice of this tool; no regulation sets it; a party cannot give more than it has, and a file that holds only some of the rows can show this by mistake; the sums are kept for each party because a ship and its receive are one movement of the same material",
+      "context": null
+    },
+    {
+      "id": "serial-born-twice",
+      "severity": "error",
+      "message": "The serial SN-77 is made by row 13 (assemble) and was already made by row 12, on line 13; a serial number names one unit and is made once.",
+      "file": "examples/bad/events.csv",
+      "line": 14,
+      "column": 55,
+      "at": "examples/bad/events.csv:14",
+      "subject": "SER-1",
+      "fix": "Give each unit its own serial number, or delete the repeated row.",
+      "kind": "across rows",
+      "own": "Treating a serial number as unique in the file is a best practice of this tool; no regulation sets it; if your serial numbers repeat from one product to the next, put the product in front of them",
+      "context": "Work on digital product passports speaks of data at the level of a batch or of an item, so a chain of lots and serial numbers that holds together is useful input to that work; this tool checks no passport and does not say what a passport needs."
+    },
+    {
+      "id": "serial-on-two-lots",
+      "severity": "error",
+      "message": "The serial SN-88 is on the lot SER-3 at row 16, but on the lot SER-2 at row 14; one serial number names one unit.",
+      "file": "examples/bad/events.csv",
+      "line": 17,
+      "column": 63,
+      "at": "examples/bad/events.csv:17",
+      "subject": "SER-3",
+      "fix": "Correct the lot or the product of the row named, or give the units different serial numbers.",
+      "kind": "across rows",
+      "own": "Treating a serial number as one unit is a best practice of this tool; no regulation sets it; a unit is in one lot and is one product",
+      "context": "Work on digital product passports speaks of data at the level of a batch or of an item, so a chain of lots and serial numbers that holds together is useful input to that work; this tool checks no passport and does not say what a passport needs."
+    },
+    {
+      "id": "custody-time-reversed",
+      "severity": "error",
+      "message": "Row 27 (receive) takes in the lot TR-1 at 2101-02-07T10:00:00Z, before row 26 (ship) sends it at 2101-02-08T10:00:00Z.",
+      "file": "examples/bad/events.csv",
+      "line": 28,
+      "column": 14,
+      "at": "examples/bad/events.csv:28",
+      "subject": "TR-1",
+      "fix": "Correct the time of the row named; a lot cannot arrive before it is sent.",
+      "kind": "across rows",
+      "own": "Reading the times along the custody chain is a best practice of this tool; no regulation sets it; events of one lot should not go back in time",
+      "context": null
+    },
+    {
+      "id": "genealogy-loop",
+      "severity": "error",
+      "message": "The lot LOOP-A is made from LOOP-B, which is made from LOOP-A again. Row 29 (produce) closes the loop; a lot cannot be made from itself.",
+      "file": "examples/bad/events.csv",
+      "line": 30,
+      "column": 61,
+      "at": "examples/bad/events.csv:30",
+      "subject": "LOOP-A",
+      "fix": "Correct the input_lots of the row named; a lot is made from lots that existed before it.",
+      "kind": "across rows",
+      "own": "Refusing a loop in the genealogy is a best practice of this tool; no regulation sets it; a trace backward from a lot in a loop never ends",
+      "context": "GS1 EPCIS has an event type for an event that uses input items or lots and makes output items or lots, and a produce or assemble row with input_lots is the same idea in a spreadsheet; this tool does not read EPCIS and does not check conformance to it."
+    },
+    {
+      "id": "row-malformed",
+      "severity": "error",
+      "message": "Row 32 has 4 cells but the header has 15; the row was left out of every other check. A cell that holds a comma, a tab or a line end must be in double quotes.",
+      "file": "examples/bad/events.csv",
+      "line": 33,
+      "column": 1,
+      "at": "examples/bad/events.csv:33",
+      "subject": null,
+      "fix": "Put a cell that holds a comma, a tab or a line end in double quotes, and write a quote inside it as two quotes.",
+      "kind": "file",
+      "own": "Reporting a row of the wrong width is a best practice of this tool; no regulation sets it; every cell after the extra one would be shifted and read as another column",
+      "context": null
+    },
+    {
+      "id": "event-type-unknown",
+      "severity": "error",
+      "message": "The event_type of row 33, \"Recieve\", is not one of receive, produce, ship, assemble, scrap. Did you mean receive? The row was not checked.",
+      "file": "examples/bad/events.csv",
+      "line": 34,
+      "column": 6,
+      "at": "examples/bad/events.csv:34",
+      "subject": null,
+      "fix": "Write one of \"receive\", \"produce\", \"ship\", \"assemble\" or \"scrap\" in the event_type column.",
+      "kind": "row",
+      "own": "The list of five kinds of event is a best practice of this tool; no regulation sets it; the kinds and their names are the tool's own, kept small on purpose",
+      "context": null
+    },
+    {
+      "id": "event-incomplete",
+      "severity": "error",
+      "message": "Row 34 (ship) has no value in the cell under \"to_party\", which a ship row needs.",
+      "file": "examples/bad/events.csv",
+      "line": 35,
+      "column": 44,
+      "at": "examples/bad/events.csv:35",
+      "subject": "RM-2",
+      "fix": "Fill the cell named from the business record the row comes from; docs/inputs.md says what each kind of event needs.",
+      "kind": "row",
+      "own": "Asking for these cells is a best practice of this tool; no regulation sets it; a chain of lots cannot be followed through a row that does not say which lot, who or when",
+      "context": null
+    },
+    {
+      "id": "quantity-not-positive",
+      "severity": "error",
+      "message": "The quantity of row 35 (scrap) is zero; a quantity must be above zero.",
+      "file": "examples/bad/events.csv",
+      "line": 36,
+      "column": 52,
+      "at": "examples/bad/events.csv:36",
+      "subject": "RM-2",
+      "fix": "Write the quantity as a plain number above zero, such as 25 or 12.5, with no unit in the cell.",
+      "kind": "row",
+      "own": "Asking for a plain positive number is a best practice of this tool; no regulation sets it; a quantity of zero or one that is text cannot be added up or compared",
+      "context": null
+    },
+    {
+      "id": "unit-missing",
+      "severity": "error",
+      "message": "The quantity of row 36 (scrap), 3, has no unit in the unit column.",
+      "file": "examples/bad/events.csv",
+      "line": 37,
+      "column": 54,
+      "at": "examples/bad/events.csv:37",
+      "subject": "RM-2",
+      "fix": "Give the unit with the quantity, such as kg, pieces or litres.",
+      "kind": "row",
+      "own": "Asking for the unit is a best practice of this tool; no regulation sets it; quantities are added up and compared only in one unit, so a quantity with no unit can be checked against nothing",
+      "context": null
+    },
+    {
+      "id": "input-lots-unreadable",
+      "severity": "error",
+      "message": "The input_lots of row 37 (produce): entry 1, \"RM-2:5\", is not written lot:quantity:unit. Write each as lot:quantity:unit and separate the entries with semicolons.",
+      "file": "examples/bad/events.csv",
+      "line": 38,
+      "column": 60,
+      "at": "examples/bad/events.csv:38",
+      "subject": "BAD-1",
+      "fix": "Write each input as lot:quantity:unit and separate the entries with semicolons, such as RM-1:5:kg;RM-2:2:kg.",
+      "kind": "row",
+      "own": "The form lot:quantity:unit is a best practice of this tool; no regulation sets it; the tool needs the quantity of each input to compare an event with its inputs",
+      "context": "GS1 EPCIS has an event type for an event that uses input items or lots and makes output items or lots, and a produce or assemble row with input_lots is the same idea in a spreadsheet; this tool does not read EPCIS and does not check conformance to it."
+    },
+    {
+      "id": "date-invalid",
+      "severity": "error",
+      "message": "The event_time of row 38 (produce), \"2101-02-30T10:00:00Z\", has the day 30, but month 02 of 2101 has 28 days.",
+      "file": "examples/bad/events.csv",
+      "line": 39,
+      "column": 14,
+      "at": "examples/bad/events.csv:39",
+      "subject": "DT-1",
+      "fix": "Write the time as YYYY-MM-DD, or as YYYY-MM-DDThh:mm:ss with a time zone, Z or +hh:mm.",
+      "kind": "row",
+      "own": "Reading only dates written one way is a best practice of this tool; no regulation sets it; the order of month and day in other forms is ambiguous, and the order of events depends on the time",
+      "context": null
+    },
+    {
+      "id": "secret-in-file",
+      "severity": "error",
+      "message": "A cell of the column \"site\" is shaped like a mnemonic. The tool never reads a seed or a key, and the value is not shown.",
+      "file": "examples/bad/events.csv",
+      "line": 39,
+      "column": 45,
+      "at": "examples/bad/events.csv:39",
+      "subject": null,
+      "fix": "Remove the value from the file and from wherever the file was copied, treat it as exposed and move what it controls to a new key. A record of lots names lots, parties and quantities, never the key of an account.",
+      "kind": "file",
+      "own": "Looking for keys and seeds is a best practice of this tool; no regulation sets it; a file that goes to a shared ledger project often sits next to wallets, and a report must never copy a secret into a log",
+      "context": null
+    },
+    {
+      "id": "future-date",
+      "severity": "error",
+      "message": "The event_time of row 39 (produce), 2101-04-20T08:00:00Z, is after the moment given with --now.",
+      "file": "examples/bad/events.csv",
+      "line": 40,
+      "column": 14,
+      "at": "examples/bad/events.csv:40",
+      "subject": "FU-1",
+      "fix": "Correct the time or the clock of the system that wrote it; an event cannot be recorded before it took place.",
+      "kind": "row",
+      "own": "Refusing a time from the future is a best practice of this tool; no regulation sets it; the tool reads no clock, so the moment is the one given with --now",
+      "context": null
+    },
+    {
+      "id": "column-unknown",
+      "severity": "warning",
+      "message": "The column \"documentref\" is not a column the tool reads, so the values under it are not checked. Did you mean document_ref?",
+      "file": "examples/bad/events.csv",
+      "line": 1,
+      "column": 112,
+      "at": "examples/bad/events.csv:1",
+      "subject": null,
+      "fix": "Correct the name to a column of docs/inputs.md, or leave the column in if it is for your own use.",
+      "kind": "file",
+      "own": "Reporting a column that is not read is a best practice of this tool; no regulation sets it; a misspelt name would otherwise hide a cell from every check",
+      "context": null
+    },
+    {
+      "id": "mass-balance-exceeded",
+      "severity": "warning",
+      "message": "By row 3 the produce event B-03 makes 120 kg in total, more than the 100 kg of its inputs.",
+      "file": "examples/bad/events.csv",
+      "line": 4,
+      "column": 55,
+      "at": "examples/bad/events.csv:4",
+      "subject": "MIX-1",
+      "fix": "Check the quantities against the work order, name the inputs that were left out, or set --yield-tolerance if a gain such as added water is expected.",
+      "kind": "row",
+      "own": "A mass balance is a best practice of this tool; no regulation sets it; a process that makes more than it uses has an input that is not written down, and a warning leaves room for added ingredients",
+      "context": "GS1 EPCIS has an event type for an event that uses input items or lots and makes output items or lots, and a produce or assemble row with input_lots is the same idea in a spreadsheet; this tool does not read EPCIS and does not check conformance to it."
+    },
+    {
+      "id": "custody-gap",
+      "severity": "warning",
+      "message": "Row 20 (receive) is by Yard Logistics, but row 19 (ship) sends the lot CG-1 to Zenith Foods.",
+      "file": "examples/bad/events.csv",
+      "line": 21,
+      "column": 35,
+      "at": "examples/bad/events.csv:21",
+      "subject": "CG-1",
+      "fix": "Add the missing receive or ship row, or correct the party in the row named.",
+      "kind": "across rows",
+      "own": "Following a lot from party to party is a best practice of this tool; no regulation sets it; a lot that changes hands without a record cannot be traced through the gap, and a file that holds only some of the rows can show this by mistake",
+      "context": null
+    },
+    {
+      "id": "custody-gap",
+      "severity": "warning",
+      "message": "Row 23 (ship): Zenith Foods ships the lot CG-2, but row 22 (ship) only sends it to Zenith Foods and no receive by Zenith Foods follows.",
+      "file": "examples/bad/events.csv",
+      "line": 24,
+      "column": 32,
+      "at": "examples/bad/events.csv:24",
+      "subject": "CG-2",
+      "fix": "Add the missing receive or ship row, or correct the party in the row named.",
+      "kind": "across rows",
+      "own": "Following a lot from party to party is a best practice of this tool; no regulation sets it; a lot that changes hands without a record cannot be traced through the gap, and a file that holds only some of the rows can show this by mistake",
+      "context": null
+    },
+    {
+      "id": "event-id-repeated",
+      "severity": "warning",
+      "message": "The event_id of row 30, B-01, is also the event_id of row 1, on line 2, and the two rows are not one event; give each event its own identifier.",
+      "file": "examples/bad/events.csv",
+      "line": 31,
+      "column": 1,
+      "at": "examples/bad/events.csv:31",
+      "subject": "ID-1",
+      "fix": "Give each event its own event_id.",
+      "kind": "across rows",
+      "own": "Asking for a unique event_id is a best practice of this tool; no regulation sets it; an event that is named twice cannot be pointed at",
+      "context": null
+    },
+    {
+      "id": "duplicate-row",
+      "severity": "warning",
+      "message": "Row 31 has the same cells as row 7, on line 8, so one event is counted twice. It was left out of the other checks.",
+      "file": "examples/bad/events.csv",
+      "line": 32,
+      "column": 1,
+      "at": "examples/bad/events.csv:32",
+      "subject": "LATE-1",
+      "fix": "Delete the repeated row, or correct the cell that should differ.",
+      "kind": "across rows",
+      "own": "Looking for repeated rows is a best practice of this tool; no regulation sets it; a repeated row doubles the quantity of a lot",
+      "context": null
+    },
+    {
+      "id": "units-not-comparable",
+      "severity": "info",
+      "message": "The produce event B-04 has inputs in kg and outputs in pieces, so the tool cannot compare what it makes with what it uses; it compares in one unit only.",
+      "file": "examples/bad/events.csv",
+      "line": 5,
+      "column": 56,
+      "at": "examples/bad/events.csv:5",
+      "subject": "PACK-1",
+      "fix": "Use one unit for the lot and for the event, or accept that this event and this lot are not checked for quantity.",
+      "kind": "across rows",
+      "own": "Comparing only in one unit is a best practice of this tool; no regulation sets it; a conversion between units belongs to a recipe or a product, which the file does not carry",
+      "context": null
+    },
+    {
+      "id": "ship-without-receive",
+      "severity": "info",
+      "message": "Row 19 (ship) sends the lot CG-1 to Zenith Foods, but no receive row of the file takes it in there.",
+      "file": "examples/bad/events.csv",
+      "line": 20,
+      "column": 44,
+      "at": "examples/bad/events.csv:20",
+      "subject": "CG-1",
+      "fix": "If the file is meant to hold both sides of every move, add the receive row; if it holds one party, no change is needed.",
+      "kind": "across rows",
+      "own": "Matching a ship with a receive is a best practice of this tool; no regulation sets it; the recipient keeps its own records, so this is a note",
+      "context": null
+    },
+    {
+      "id": "ship-without-receive",
+      "severity": "info",
+      "message": "Row 26 (ship) sends the lot TR-1 to Zenith Foods, but no receive row of the file takes it in there.",
+      "file": "examples/bad/events.csv",
+      "line": 27,
+      "column": 44,
+      "at": "examples/bad/events.csv:27",
+      "subject": "TR-1",
+      "fix": "If the file is meant to hold both sides of every move, add the receive row; if it holds one party, no change is needed.",
+      "kind": "across rows",
+      "own": "Matching a ship with a receive is a best practice of this tool; no regulation sets it; the recipient keeps its own records, so this is a note",
+      "context": null
+    },
+    {
+      "id": "receive-without-ship",
+      "severity": "info",
+      "message": "Row 27 (receive) takes in the lot TR-1 at Zenith Foods, but no ship row of the file sends it there.",
+      "file": "examples/bad/events.csv",
+      "line": 28,
+      "column": 35,
+      "at": "examples/bad/events.csv:28",
+      "subject": "TR-1",
+      "fix": "If the file is meant to hold both sides of every move, add the ship row; if it holds one party, no change is needed.",
+      "kind": "across rows",
+      "own": "Matching a receive with a ship is a best practice of this tool; no regulation sets it; each party keeps its own records, so this is a note",
+      "context": null
+    }
+  ],
+  "eventTypes": [
+    {
+      "id": "receive",
+      "label": "receive",
+      "rows": 5,
+      "lots": 5
+    },
+    {
+      "id": "produce",
+      "label": "produce",
+      "rows": 17,
+      "lots": 17
+    },
+    {
+      "id": "ship",
+      "label": "ship",
+      "rows": 7,
+      "lots": 6
+    },
+    {
+      "id": "assemble",
+      "label": "assemble",
+      "rows": 5,
+      "lots": 4
+    },
+    {
+      "id": "scrap",
+      "label": "scrap",
+      "rows": 2,
+      "lots": 1
+    },
+    {
+      "id": "other",
+      "label": "no known kind",
+      "rows": 1,
+      "lots": 0
+    }
+  ],
+  "notes": [],
+  "notice": "This report checks the records in the file, not whether they are true, and it is not a certification of any kind.",
+  "result": {
+    "pass": false,
+    "failOn": "error",
+    "text": "FAIL - 18 findings at or above error (18 error, 6 warning, 4 info)"
+  }
+}

@@ -1,0 +1,30 @@
+lot-genealogy-check checks
+
+  file-unreadable          error    file         the file is not a table the reader can follow (a quote never closed, text after a closing quote, a cell too long, semicolons for commas), has no event_type column or has a header and no rows, so nothing in it was checked
+  column-missing           error    file         a column that the rows of a kind of event need is not in the header at all; it is reported once, at the header, and not for each row
+  column-unknown           warning  file         a column the tool does not read, often a misspelt name; nothing under it was checked
+  column-duplicate         error    file         two columns of the header have the same name once case and separators are ignored; only the first is read
+  row-malformed            error    file         a row with more or fewer cells than the header, which usually means a comma that is not in quotes; the row was left out of every other check
+  secret-in-file           error    file         the file holds a private key, a seed or a mnemonic, under a column named for one or as a cell shaped like one; the tool never reads it and never shows it
+  event-type-unknown       error    row          an event_type that is empty or is none of receive, produce, ship, assemble and scrap; the row was left out of the other checks
+  event-incomplete         error    row          a cell that the kind of event needs is empty or a placeholder such as n/a: event_id, event_time, party, lot and quantity for every kind, the product for receive, produce and assemble, to_party for ship, input_lots for assemble; also a ship row whose from_party is not its party
+  quantity-not-positive    error    row          a quantity that is not a plain positive number: zero, negative, with a thousands separator, with an exponent, text, or with more than 40 digits
+  unit-missing             error    row          a quantity with no unit in the unit column
+  input-lots-unreadable    error    row          an entry of input_lots that is not written lot:quantity:unit, with a quantity that is not a plain number above zero; the event is not compared with its inputs
+  date-invalid             error    row          an event_time that is not a date, names a day that does not exist, has a time with no time zone, or is written as a date of the United States
+  future-date              error    row          an event_time later than the moment given with --now (a day alone is allowed one day more, for the time zones of the world); without --now the check does not run
+  mass-balance-exceeded    warning  row          the outputs of a produce or assemble event add up to more than its inputs in the same unit, above the --yield-tolerance percent; the rows of one event_id, kind, party and time are one event
+  units-not-comparable     info     across rows  a note: the inputs and outputs of an event, or the quantities of one lot, are in different units, so the tool cannot compare them
+  input-lot-not-available  error    across rows  an input lot of a produce or assemble row that no receive or produce row of the file holds, or that is received or made only after it is used
+  lot-overdrawn            error    across rows  the quantities of a lot that a party ships, scraps or uses add up to more than that party received or made of it, in the same unit, with exact sums; a lot that no row receives or makes and that is shipped or scrapped counts as held in a quantity of zero
+  serial-born-twice        error    across rows  the same serial number in two produce or assemble rows; a serial number names one unit and is made once
+  serial-on-two-lots       error    across rows  the same serial number on two different lots or two different products
+  custody-gap              warning  across rows  a lot is shipped from A to B and the next event on it is by C, not B; or B ships, scraps or uses it without a receive; or a receive names another sender than the ship; or a party acts on a lot that another party last held
+  custody-time-reversed    error    across rows  a lot is received before it is shipped, or shipped or scrapped before the first row that receives or makes it
+  receive-without-ship     info     across rows  a note: a receive row for a lot that no ship row of the file sends to that party; a file of one party holds the receipts of lots shipped by others
+  ship-without-receive     info     across rows  a note: a ship row for a lot that no receive row of the file takes in at the party it is sent to; the recipient keeps its own records
+  genealogy-loop           error    across rows  a lot that is, directly or through other lots, one of its own inputs
+  duplicate-row            warning  across rows  a row whose cells are all the same as an earlier row, which counts one event twice; it is left out of the other checks
+  event-id-repeated        warning  across rows  the same event_id on two rows that are not one event; rows of one produce or assemble event with the same kind, party and time may share an event_id
+
+Every check is a best practice of this tool; no regulation sets any of them. A check of the file is about the file itself, a check of a row is found from one row, and a check across rows puts rows side by side. The tool checks the records in a file, not whether they are true, and it is not a certification of any kind.

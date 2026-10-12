@@ -1,0 +1,21 @@
+lot-genealogy-check: examples/good/events.csv
+file: examples/good/events.csv (CSV, 26 lines, 3,367 bytes)
+rows: 25 (8 receive, 4 produce, 8 ship, 4 assemble and 1 scrap)
+columns: 14 in the header, 14 read, 0 not read
+lots: 5 lots, 6 parties, 4 serial numbers
+
+trace back from the lot FIN-E1: 4 lots upstream, 6 parties, 4 serial numbers
+depth limit: 1,000, depth reached: 2
+parties: Eastside Assembly Plant, Fairview Distribution, Alder Plastics Ltd, Delta Module Works, Birch Circuits Co, Cedar Cable Works
+serial numbers: SN-0001, SN-0002, SN-0003, SN-0004
+
+  depth  lot     product         parties                                         serials                             reached through
+  0      FIN-E1  Garden sensor   Eastside Assembly Plant, Fairview Distribution  SN-0001, SN-0002, SN-0003, SN-0004  the lot asked for
+  1      HSG-A1  Sensor housing  Alder Plastics Ltd, Eastside Assembly Plant     -                                   E-013 (used to make FIN-E1)
+  1      MOD-D1  Sensor module   Delta Module Works, Eastside Assembly Plant     -                                   E-013 (used to make FIN-E1)
+  2      PCB-B1  Circuit board   Birch Circuits Co, Delta Module Works           -                                   E-010 (used to make MOD-D1)
+  2      CBL-C1  Cable set       Cedar Cable Works, Delta Module Works           -                                   E-010 (used to make MOD-D1)
+
+note: the trace follows the input_lots of the produce and assemble rows; it does not run the checks, so use a normal run to see what is wrong in the file
+
+This report checks the records in the file, not whether they are true, and it is not a certification of any kind.

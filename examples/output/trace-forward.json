@@ -1,0 +1,140 @@
+{
+  "tool": "lot-genealogy-check",
+  "version": "1.0.0",
+  "input": {
+    "file": "examples/good/events.csv",
+    "format": "CSV",
+    "bytes": 3367,
+    "lines": 26
+  },
+  "events": {
+    "rows": 25,
+    "skipped": 0,
+    "columns": 14,
+    "read": 14,
+    "unread": 0,
+    "lots": 5,
+    "parties": 6,
+    "serials": 4,
+    "types": [
+      {
+        "id": "receive",
+        "label": "receive",
+        "rows": 8,
+        "lots": 5
+      },
+      {
+        "id": "produce",
+        "label": "produce",
+        "rows": 4,
+        "lots": 4
+      },
+      {
+        "id": "ship",
+        "label": "ship",
+        "rows": 8,
+        "lots": 5
+      },
+      {
+        "id": "assemble",
+        "label": "assemble",
+        "rows": 4,
+        "lots": 1
+      },
+      {
+        "id": "scrap",
+        "label": "scrap",
+        "rows": 1,
+        "lots": 1
+      }
+    ],
+    "firstTime": "2101-01-10T08:00:00Z",
+    "lastTime": "2101-01-23T10:00:00Z"
+  },
+  "traces": [
+    {
+      "direction": "forward",
+      "lot": "PCB-B1",
+      "maxDepth": 1000,
+      "depthReached": 2,
+      "stoppedAtDepth": false,
+      "lotsReached": 2,
+      "listed": 3,
+      "partiesTotal": 4,
+      "parties": [
+        "Birch Circuits Co",
+        "Delta Module Works",
+        "Eastside Assembly Plant",
+        "Fairview Distribution"
+      ],
+      "serialsTotal": 4,
+      "serials": [
+        "SN-0001",
+        "SN-0002",
+        "SN-0003",
+        "SN-0004"
+      ],
+      "lots": [
+        {
+          "lot": "PCB-B1",
+          "depth": 0,
+          "product": "Circuit board",
+          "parties": [
+            "Birch Circuits Co",
+            "Delta Module Works"
+          ],
+          "partiesTotal": 2,
+          "serials": [],
+          "serialsTotal": 0,
+          "rows": 3,
+          "via": null
+        },
+        {
+          "lot": "MOD-D1",
+          "depth": 1,
+          "product": "Sensor module",
+          "parties": [
+            "Delta Module Works",
+            "Eastside Assembly Plant"
+          ],
+          "partiesTotal": 2,
+          "serials": [],
+          "serialsTotal": 0,
+          "rows": 3,
+          "via": {
+            "event": "E-010",
+            "row": 10,
+            "lot": "PCB-B1"
+          }
+        },
+        {
+          "lot": "FIN-E1",
+          "depth": 2,
+          "product": "Garden sensor",
+          "parties": [
+            "Eastside Assembly Plant",
+            "Fairview Distribution"
+          ],
+          "partiesTotal": 2,
+          "serials": [
+            "SN-0001",
+            "SN-0002",
+            "SN-0003",
+            "SN-0004"
+          ],
+          "serialsTotal": 4,
+          "rows": 12,
+          "via": {
+            "event": "E-013",
+            "row": 13,
+            "lot": "MOD-D1"
+          }
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "the trace follows the input_lots of the produce and assemble rows; it does not run the checks, so use a normal run to see what is wrong in the file"
+  ],
+  "notice": "This report checks the records in the file, not whether they are true, and it is not a certification of any kind."
+}

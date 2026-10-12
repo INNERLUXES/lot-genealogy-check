@@ -1,0 +1,445 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "lot-genealogy-check",
+          "version": "1.0.0",
+          "informationUri": "https://github.com/INNERLUXES/lot-genealogy-check",
+          "rules": [
+            {
+              "id": "file-unreadable",
+              "name": "file-unreadable",
+              "shortDescription": {
+                "text": "the file is not a table the reader can follow (a quote never closed, text after a closing quote, a cell too long, semicolons for commas), has no event_type column or has a header and no rows, so nothing in it was checked"
+              },
+              "help": {
+                "text": "Save the events as CSV with commas or TSV with tabs, a header row and one row for each event (docs/inputs.md); fix the line named. (file)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "file"
+              }
+            },
+            {
+              "id": "column-missing",
+              "name": "column-missing",
+              "shortDescription": {
+                "text": "a column that the rows of a kind of event need is not in the header at all; it is reported once, at the header, and not for each row"
+              },
+              "help": {
+                "text": "Add the column named to the spreadsheet and fill it for the rows that need it; docs/inputs.md lists every column. (file)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "file"
+              }
+            },
+            {
+              "id": "column-unknown",
+              "name": "column-unknown",
+              "shortDescription": {
+                "text": "a column the tool does not read, often a misspelt name; nothing under it was checked"
+              },
+              "help": {
+                "text": "Correct the name to a column of docs/inputs.md, or leave the column in if it is for your own use. (file)"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "kind": "file"
+              }
+            },
+            {
+              "id": "column-duplicate",
+              "name": "column-duplicate",
+              "shortDescription": {
+                "text": "two columns of the header have the same name once case and separators are ignored; only the first is read"
+              },
+              "help": {
+                "text": "Keep one column of each name. (file)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "file"
+              }
+            },
+            {
+              "id": "row-malformed",
+              "name": "row-malformed",
+              "shortDescription": {
+                "text": "a row with more or fewer cells than the header, which usually means a comma that is not in quotes; the row was left out of every other check"
+              },
+              "help": {
+                "text": "Put a cell that holds a comma, a tab or a line end in double quotes, and write a quote inside it as two quotes. (file)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "file"
+              }
+            },
+            {
+              "id": "secret-in-file",
+              "name": "secret-in-file",
+              "shortDescription": {
+                "text": "the file holds a private key, a seed or a mnemonic, under a column named for one or as a cell shaped like one; the tool never reads it and never shows it"
+              },
+              "help": {
+                "text": "Remove the value from the file and from wherever the file was copied, treat it as exposed and move what it controls to a new key. A record of lots names lots, parties and quantities, never the key of an account. (file)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "file"
+              }
+            },
+            {
+              "id": "event-type-unknown",
+              "name": "event-type-unknown",
+              "shortDescription": {
+                "text": "an event_type that is empty or is none of receive, produce, ship, assemble and scrap; the row was left out of the other checks"
+              },
+              "help": {
+                "text": "Write one of \"receive\", \"produce\", \"ship\", \"assemble\" or \"scrap\" in the event_type column. (row)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "row"
+              }
+            },
+            {
+              "id": "event-incomplete",
+              "name": "event-incomplete",
+              "shortDescription": {
+                "text": "a cell that the kind of event needs is empty or a placeholder such as n/a: event_id, event_time, party, lot and quantity for every kind, the product for receive, produce and assemble, to_party for ship, input_lots for assemble; also a ship row whose from_party is not its party"
+              },
+              "help": {
+                "text": "Fill the cell named from the business record the row comes from; docs/inputs.md says what each kind of event needs. (row)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "row"
+              }
+            },
+            {
+              "id": "quantity-not-positive",
+              "name": "quantity-not-positive",
+              "shortDescription": {
+                "text": "a quantity that is not a plain positive number: zero, negative, with a thousands separator, with an exponent, text, or with more than 40 digits"
+              },
+              "help": {
+                "text": "Write the quantity as a plain number above zero, such as 25 or 12.5, with no unit in the cell. (row)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "row"
+              }
+            },
+            {
+              "id": "unit-missing",
+              "name": "unit-missing",
+              "shortDescription": {
+                "text": "a quantity with no unit in the unit column"
+              },
+              "help": {
+                "text": "Give the unit with the quantity, such as kg, pieces or litres. (row)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "row"
+              }
+            },
+            {
+              "id": "input-lots-unreadable",
+              "name": "input-lots-unreadable",
+              "shortDescription": {
+                "text": "an entry of input_lots that is not written lot:quantity:unit, with a quantity that is not a plain number above zero; the event is not compared with its inputs"
+              },
+              "help": {
+                "text": "Write each input as lot:quantity:unit and separate the entries with semicolons, such as RM-1:5:kg;RM-2:2:kg. (row)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "row"
+              }
+            },
+            {
+              "id": "date-invalid",
+              "name": "date-invalid",
+              "shortDescription": {
+                "text": "an event_time that is not a date, names a day that does not exist, has a time with no time zone, or is written as a date of the United States"
+              },
+              "help": {
+                "text": "Write the time as YYYY-MM-DD, or as YYYY-MM-DDThh:mm:ss with a time zone, Z or +hh:mm. (row)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "row"
+              }
+            },
+            {
+              "id": "future-date",
+              "name": "future-date",
+              "shortDescription": {
+                "text": "an event_time later than the moment given with --now (a day alone is allowed one day more, for the time zones of the world); without --now the check does not run"
+              },
+              "help": {
+                "text": "Correct the time or the clock of the system that wrote it; an event cannot be recorded before it took place. (row)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "row"
+              }
+            },
+            {
+              "id": "mass-balance-exceeded",
+              "name": "mass-balance-exceeded",
+              "shortDescription": {
+                "text": "the outputs of a produce or assemble event add up to more than its inputs in the same unit, above the --yield-tolerance percent; the rows of one event_id, kind, party and time are one event"
+              },
+              "help": {
+                "text": "Check the quantities against the work order, name the inputs that were left out, or set --yield-tolerance if a gain such as added water is expected. (row)"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "kind": "row"
+              }
+            },
+            {
+              "id": "units-not-comparable",
+              "name": "units-not-comparable",
+              "shortDescription": {
+                "text": "a note: the inputs and outputs of an event, or the quantities of one lot, are in different units, so the tool cannot compare them"
+              },
+              "help": {
+                "text": "Use one unit for the lot and for the event, or accept that this event and this lot are not checked for quantity. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "input-lot-not-available",
+              "name": "input-lot-not-available",
+              "shortDescription": {
+                "text": "an input lot of a produce or assemble row that no receive or produce row of the file holds, or that is received or made only after it is used"
+              },
+              "help": {
+                "text": "Add the receive or produce row of the lot, correct the lot code, or correct the times; a lot has to exist before it is used. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "lot-overdrawn",
+              "name": "lot-overdrawn",
+              "shortDescription": {
+                "text": "the quantities of a lot that a party ships, scraps or uses add up to more than that party received or made of it, in the same unit, with exact sums; a lot that no row receives or makes and that is shipped or scrapped counts as held in a quantity of zero"
+              },
+              "help": {
+                "text": "Check the quantities of the row named, and whether a receive or produce row of the lot is missing from the file. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "serial-born-twice",
+              "name": "serial-born-twice",
+              "shortDescription": {
+                "text": "the same serial number in two produce or assemble rows; a serial number names one unit and is made once"
+              },
+              "help": {
+                "text": "Give each unit its own serial number, or delete the repeated row. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "serial-on-two-lots",
+              "name": "serial-on-two-lots",
+              "shortDescription": {
+                "text": "the same serial number on two different lots or two different products"
+              },
+              "help": {
+                "text": "Correct the lot or the product of the row named, or give the units different serial numbers. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "custody-gap",
+              "name": "custody-gap",
+              "shortDescription": {
+                "text": "a lot is shipped from A to B and the next event on it is by C, not B; or B ships, scraps or uses it without a receive; or a receive names another sender than the ship; or a party acts on a lot that another party last held"
+              },
+              "help": {
+                "text": "Add the missing receive or ship row, or correct the party in the row named. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "custody-time-reversed",
+              "name": "custody-time-reversed",
+              "shortDescription": {
+                "text": "a lot is received before it is shipped, or shipped or scrapped before the first row that receives or makes it"
+              },
+              "help": {
+                "text": "Correct the time of the row named; a lot cannot arrive before it is sent. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "receive-without-ship",
+              "name": "receive-without-ship",
+              "shortDescription": {
+                "text": "a note: a receive row for a lot that no ship row of the file sends to that party; a file of one party holds the receipts of lots shipped by others"
+              },
+              "help": {
+                "text": "If the file is meant to hold both sides of every move, add the ship row; if it holds one party, no change is needed. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "ship-without-receive",
+              "name": "ship-without-receive",
+              "shortDescription": {
+                "text": "a note: a ship row for a lot that no receive row of the file takes in at the party it is sent to; the recipient keeps its own records"
+              },
+              "help": {
+                "text": "If the file is meant to hold both sides of every move, add the receive row; if it holds one party, no change is needed. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "genealogy-loop",
+              "name": "genealogy-loop",
+              "shortDescription": {
+                "text": "a lot that is, directly or through other lots, one of its own inputs"
+              },
+              "help": {
+                "text": "Correct the input_lots of the row named; a lot is made from lots that existed before it. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "duplicate-row",
+              "name": "duplicate-row",
+              "shortDescription": {
+                "text": "a row whose cells are all the same as an earlier row, which counts one event twice; it is left out of the other checks"
+              },
+              "help": {
+                "text": "Delete the repeated row, or correct the cell that should differ. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            },
+            {
+              "id": "event-id-repeated",
+              "name": "event-id-repeated",
+              "shortDescription": {
+                "text": "the same event_id on two rows that are not one event; rows of one produce or assemble event with the same kind, party and time may share an event_id"
+              },
+              "help": {
+                "text": "Give each event its own event_id. (across rows)"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "kind": "across rows"
+              }
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "examples/good/events.csv"
+          }
+        }
+      ],
+      "results": [],
+      "properties": {
+        "notice": "This report checks the records in the file, not whether they are true, and it is not a certification of any kind.",
+        "result": "PASS - no finding at or above error"
+      }
+    }
+  ]
+}
