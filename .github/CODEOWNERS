@@ -1,0 +1,26 @@
+# Every change is reviewed by a maintainer.
+* @innerluxesdev
+
+# The reader of tables, the reading of the file, the search for keys and seeds, the columns and the kinds of event, the
+# dates, the decimals, the events, the checks across rows, the walks over the lots, the checks, the rules and the output
+# decide every result and what is read from the disk; changes need extra care.
+/src/csv.js @innerluxesdev
+/src/files.js @innerluxesdev
+/src/secrets.js @innerluxesdev
+/src/fields.js @innerluxesdev
+/src/dates.js @innerluxesdev
+/src/time.js @innerluxesdev
+/src/decimal.js @innerluxesdev
+/src/events.js @innerluxesdev
+/src/across.js @innerluxesdev
+/src/graph.js @innerluxesdev
+/src/trace.js @innerluxesdev
+/src/data.js @innerluxesdev
+/src/rules.js @innerluxesdev
+/src/check.js @innerluxesdev
+/src/report.js @innerluxesdev
+/src/cli.js @innerluxesdev
+/src/collect.js @innerluxesdev
+/src/size.js @innerluxesdev
+/src/text.js @innerluxesdev
+/src/index.js @innerluxesdev
